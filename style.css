@@ -1,0 +1,1041 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Top Navigation */
+.top-nav {
+    background-color: #1a237e; /* Deep blue */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.top-nav .logo img {
+    height: 40px; /* Adjust as needed */
+}
+
+.nav-button {
+    background-color: #d32f2f; /* Red color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+     transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #e53935; /* Slightly lighter red */
+}
+
+/* Hero Section */
+.hero-section {
+    background: #1a237e; /* Set solid deep blue background */
+    color: white;
+    text-align: left;
+    padding: 100px 20px; /* Increased top/bottom padding */
+    position: relative;
+    display: flex;
+    justify-content: space-around; /* Distribute space around items */
+    align-items: center;
+    min-height: 600px; /* Increased minimum height */
+    gap: 50px; /* Increased gap between flex items */
+}
+
+.hero-content {
+    max-width: 500px;
+    /* Removed margin-left: 5%; */
+    text-align: left; /* Ensure text alignment */
+    z-index: 1; /* Ensure content is above potential background elements */
+    padding: 0 20px; /* Add some horizontal padding */
+}
+
+.hero-content h1 {
+    font-size: 4.5em; /* Increased font size */
+    margin-bottom: 25px; /* Adjusted margin */
+    line-height: 1.1;
+    color: #ffb300; /* Orange color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add subtle text shadow */
+}
+
+.hero-content p {
+    margin-bottom: 20px; /* Increased margin */
+    font-size: 1.1em; /* Increased font size */
+}
+
+.hero-image {
+    /* Image will be set via CSS background or replaced with an img tag */
+     /* max-width: 100%; Removed this */
+     max-width: 500px; /* Set max width to match content */
+     flex-basis: 50%; /* Allow flex item to take up to 50% of space */
+     text-align: center; /* Center image if it's smaller than its container */
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below image */
+}
+
+.shop-button {
+    background-color: #ffb300; /* Orange color */
+    color: #1a237e; /* Deep blue text color */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add space above the button */
+    animation: pulse 2s infinite;
+}
+
+.shop-button:hover {
+    background-color: #ffc107;
+}
+
+/* Animation for attention */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* General Section Styles */
+.intro-section, .product-section, .customer-benefits, .stats-section, .countdown-section, .order-form-section, .faq-section, .testimonials-section, footer {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.intro-section, .testimonials-section, .faq-section, .stats-section {
+    background-color: #e3f2fd; /* Light blue background */
+}
+
+.product-section, .customer-benefits, .countdown-section, .order-form-section {
+     background-color: #1a237e; /* Deep blue background */
+     color: white;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px; /* Adjusted margin */
+    color: inherit;
+}
+
+.section-description {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    font-size: 1.1em;
+}
+
+/* Intro Section */
+.intro-grid {
+    display: flex; /* Use flexbox for side-by-side layout */
+    justify-content: center;
+    gap: 40px; /* Increased gap */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.intro-item {
+    flex: 1; /* Allow items to grow and shrink */
+    min-width: 300px; /* Minimum width for items */
+    border: none;
+    padding: 0; /* Remove padding */
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align text to the left */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+}
+
+.intro-item:hover {
+    transform: translateY(-5px); /* Lift up slightly on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.intro-item img {
+    width: 100%;
+    height: 200px; /* Set a fixed height for images */
+    object-fit: cover; /* Crop images to fit */
+}
+
+.intro-item video {
+    width: 100%;
+    height: 200px; /* Set a fixed height for videos to match image style */
+    object-fit: cover; /* Crop video to fit */
+}
+
+.intro-text {
+    padding: 20px;
+}
+
+.intro-text h3 {
+    font-size: 1.5em;
+    margin-top: 0;
+    color: #1a237e; /* Deep blue */
+}
+
+/* Product Features */
+.product-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted minmax */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    border: none;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item img {
+    height: 50px; /* Adjust icon size */
+    margin-bottom: 15px;
+}
+
+/* Customer Benefits */
+.benefits-grid {
+     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit-item {
+    border: none;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.benefit-item img {
+    height: 50px; /* Adjust icon size */
+    margin-bottom: 15px;
+}
+
+/* Stats Section */
+.stats-section {
+    background-color: #ffb300; /* Orange background */
+    color: #1a237e; /* Deep blue text */
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 20px;
+    flex-wrap: wrap; /* Allow items to wrap */
+}
+
+.stats-item {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 10px; /* Add some margin */
+}
+
+.stats-item span {
+    display: block;
+    font-size: 0.5em;
+    font-weight: normal;
+}
+
+/* Countdown Section */
+.countdown-section {
+    background-color: #1a237e; /* Deep blue background */
+    color: white;
+}
+
+.countdown-section h2 {
+    color: #ffb300; /* Orange heading */
+}
+
+.countdown-timer {
+    font-size: 3.5em; /* Adjusted font size */
+    margin-bottom: 20px;
+    color: #ffb300; /* Orange color */
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-unit {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #283593; /* Slightly lighter blue */
+    border-radius: 5px;
+}
+
+.time-label {
+    display: block; /* Show label below unit */
+    font-size: 0.3em;
+    font-weight: normal;
+    margin-top: 5px;
+    color: white; /* White label text */
+}
+
+.order-button {
+    background-color: #ffb300; /* Orange background */
+    color: #1a237e; /* Deep blue text */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-top: 30px; /* Increased margin */
+    font-weight: bold;
+     transition: background-color 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.order-button:hover {
+    background-color: #ffc107;
+}
+
+.offer-box {
+    border: 2px dashed #ffb300; /* Orange dashed border */
+    padding: 20px;
+    max-width: 300px;
+    margin: 30px auto 0 auto; /* Space above and center */
+    text-align: center;
+}
+
+.offer-box .original-price del {
+    color: #cccccc; /* Grey color for strike-through */
+}
+
+.offer-box .discount-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffb300; /* Orange color */
+    margin: 10px 0;
+}
+
+.offer-box .free-ship {
+    font-weight: bold;
+    color: #32cd32; /* Green color */
+}
+
+/* Order Form Section */
+.order-form-section {
+    background-color: #ffffff; /* White background */
+    color: #333;
+}
+
+.order-form-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allow items to wrap */
+    text-align: left; /* Align form text to left */
+}
+
+.order-form {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #e3f2fd; /* Light blue background */
+}
+
+.order-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background-color: #1a237e; /* Deep blue background */
+    color: white;
+    border-radius: 8px;
+}
+
+.order-info h3 {
+    color: #ffb300; /* Orange heading */
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.order-info p {
+    margin-bottom: 10px;
+}
+
+.order-form input[type="text"],
+.order-form select,
+.order-form textarea {
+    width: calc(100% - 24px); /* Adjust for padding and border */
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.order-form textarea {
+    min-height: 100px; /* Set a minimum height for textarea */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.order-form label {
+    display: block; /* Make radio buttons appear on new lines */
+    margin-bottom: 10px;
+}
+
+.order-form input[type="radio"] {
+    margin-right: 5px;
+}
+
+.submit-order {
+    background-color: #ffb300; /* Orange background */
+    color: #1a237e; /* Deep blue text */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.submit-order:hover {
+     background-color: #ffc107;
+}
+
+.promo-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #283593; /* Slightly lighter blue */
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.promo-item img {
+    height: 50px; /* Adjust promo image size */
+    margin-right: 15px;
+}
+
+.promo-price .original-price del {
+     color: #cccccc; /* Grey color for strike-through */
+}
+
+.promo-price .discount-price {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffb300; /* Orange color */
+}
+
+/* FAQ Section */
+.faq-section {
+    background-color: #e3f2fd; /* Light blue background */
+}
+
+.faq-form {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+}
+
+.faq-form input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.faq-form button {
+    background-color: #1a237e; /* Deep blue background */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+     transition: background-color 0.3s ease;
+}
+
+.faq-form button:hover {
+    background-color: #283593; /* Slightly lighter blue */
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background-color: #1a237e; /* Deep blue background */
+    color: white;
+}
+
+.testimonials-section h2 {
+    color: #ffb300; /* Orange heading */
+}
+
+.testimonials-section > p { /* Style for the comment count */
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.sort-options {
+    margin-bottom: 30px;
+}
+
+.sort-options button {
+    background-color: #283593; /* Slightly lighter blue */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    margin: 0 5px;
+    cursor: pointer;
+     transition: background-color 0.3s ease;
+}
+
+.sort-options button:hover {
+    background-color: #3949ab; /* Even lighter blue */
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-item {
+    border: none;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align text to left */
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-item img {
+    width: 60px; /* Adjust customer image size */
+    height: 60px;
+    border-radius: 50%; /* Round images */
+    margin-bottom: 15px;
+}
+
+.testimonial-item .customer-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.testimonial-item .stars {
+    color: #ffb300; /* Orange stars */
+    margin-bottom: 5px;
+}
+
+.testimonial-item .verified {
+    color: #32cd32; /* Green verified */
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.testimonial-item .review-text {
+    margin-bottom: 15px;
+}
+
+.testimonial-item .review-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.testimonial-item .review-time {
+    font-size: 0.9em;
+    color: #666;
+    text-align: right; /* Align time to the right */
+}
+
+/* Footer */
+footer {
+    background-color: #001f3f; /* Even deeper blue */
+    color: white;
+    text-align: left; /* Align footer text to left */
+    padding: 40px 20px 20px 20px; /* Adjusted padding */
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted minmax */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 30px auto; /* Center and add space below */
+}
+
+.footer-column h4 {
+    color: #ffb300; /* Orange heading */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.footer-column p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.footer-column a {
+    color: white;
+    text-decoration: none;
+     transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #ffb300; /* Orange on hover */
+}
+
+.footer-column form {
+    display: flex;
+    margin-top: 15px;
+}
+
+.footer-column input[type="text"] {
+    flex-grow: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.9em;
+}
+
+.footer-column button {
+    background-color: #ffb300; /* Orange background */
+    color: #1a237e; /* Deep blue text */
+    padding: 8px 15px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9em;
+    cursor: pointer;
+     transition: background-color 0.3s ease;
+}
+
+.footer-column button:hover {
+    background-color: #ffc107;
+}
+
+.footer-bottom {
+    text-align: center; /* Center bottom text */
+    font-size: 0.9em;
+    color: #cccccc; /* Grey color */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .top-nav {
+        flex-direction: column; /* Stack logo and button */
+        align-items: center;
+        padding: 15px 10px; /* Adjusted padding */
+    }
+
+    .top-nav .logo img {
+        height: 35px; /* Slightly smaller logo */
+        margin-bottom: 10px;
+    }
+
+    .nav-button {
+        padding: 8px 15px; /* Adjusted button padding */
+        font-size: 0.9em; /* Adjusted button font size */
+    }
+
+    .hero-section {
+        flex-direction: column;
+        padding: 40px 15px; /* Adjusted padding */
+        min-height: unset; /* Remove minimum height on mobile */
+        gap: 30px; /* Adjusted gap */
+    }
+
+    .hero-content {
+        margin-left: 0;
+        text-align: center;
+        max-width: 100%;
+        padding: 0 10px; /* Adjusted padding */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em; /* Further adjusted font size */
+        margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .hero-content p {
+        font-size: 1em; /* Adjusted font size */
+        margin-bottom: 15px; /* Adjusted margin */
+    }
+
+     .hero-image {
+        width: 100%; /* Make image full width */
+        height: auto;
+        margin-top: 20px; /* Adjusted margin */
+        max-width: 400px; /* Limit max width even if full width */
+    }
+    
+    .hero-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .shop-button, .submit-order {
+        font-size: 1.2em; /* Adjusted font size */
+        padding: 12px 25px; /* Adjusted padding */
+        margin-top: 15px; /* Adjusted margin */
+        animation: pulse 2s infinite;
+    }
+
+    /* General Section Styles */
+    .intro-section, .product-section, .customer-benefits, .stats-section, .countdown-section, .order-form-section, .faq-section, .testimonials-section, footer {
+        padding: 50px 15px; /* Adjusted padding */
+    }
+
+    h2 {
+        font-size: 2em;
+        margin-bottom: 25px; /* Adjusted margin */
+    }
+
+    .section-description {
+        font-size: 1em;
+        margin-bottom: 25px; /* Adjusted margin */
+    }
+
+    .intro-grid, .product-features, .benefits-grid, .testimonials-grid, .order-form-container, .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px; /* Adjusted gap */
+    }
+
+    .intro-item, .feature-item, .benefit-item, .testimonial-item {
+        padding: 20px; /* Adjusted padding */
+    }
+
+    .intro-item img, .intro-item video {
+        height: 180px; /* Adjusted height */
+    }
+
+    .intro-text h3 {
+        font-size: 1.3em; /* Adjusted font size */
+        margin-bottom: 10px; /* Adjusted margin */
+    }
+
+     .intro-text p {
+         font-size: 0.9em; /* Adjusted font size */
+     }
+
+    .feature-item img, .benefit-item img {
+        height: 40px; /* Slightly smaller icons */
+        margin-bottom: 10px; /* Adjusted margin */
+    }
+
+    .feature-item p, .benefit-item p {
+        font-size: 0.9em; /* Adjusted font size */
+    }
+
+    .stats-section {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 15px; /* Adjusted padding */
+    }
+
+    .stats-item {
+        font-size: 1.8em; /* Further adjusted font size */
+        margin: 8px 0; /* Adjusted margin */
+    }
+
+    .stats-item span {
+         font-size: 0.6em; /* Adjusted span font size */
+    }
+
+    .countdown-section h2 {
+         font-size: 2em; /* Adjusted font size */
+        margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    .countdown-section p {
+         font-size: 1em; /* Adjusted font size */
+         margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .countdown-timer {
+        font-size: 1.6em; /* Further adjusted font size */
+        flex-direction: row; /* Keep time units in a row if space allows */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+        gap: 10px; /* Adjusted gap */
+    }
+
+    .time-unit {
+        margin: 0 5px; /* Adjusted margin */
+        padding: 5px 8px; /* Adjusted padding */
+        font-size: 1.5em; /* Adjusted font size */
+    }
+
+     .time-label {
+        font-size: 0.5em; /* Adjusted font size */
+     }
+
+    .order-button, .submit-order {
+        margin-top: 20px; /* Adjusted margin */
+    }
+
+    .offer-box {
+        max-width: 100%; /* Full width on mobile */
+        padding: 15px; /* Adjusted padding */
+        margin: 20px auto 0 auto; /* Adjusted margin */
+    }
+
+     .offer-box .original-price del {
+         font-size: 0.9em; /* Adjusted font size */
+     }
+
+    .offer-box .discount-price {
+        font-size: 1.3em; /* Further adjusted font size */
+        margin: 5px 0; /* Adjusted margin */
+    }
+
+    .offer-box .min-order, .offer-box .free-ship {
+        font-size: 0.9em; /* Adjusted font size */
+    }
+
+    .order-form-container {
+         flex-direction: column;
+         gap: 25px; /* Adjusted gap */
+    }
+
+    .order-form, .order-info {
+        min-width: unset;
+        width: 100%;
+        padding: 20px; /* Adjusted padding */
+    }
+
+    .order-info h3 {
+        font-size: 1.3em; /* Adjusted font size */
+        margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .order-info p {
+        font-size: 0.9em; /* Adjusted font size */
+        margin-bottom: 8px; /* Adjusted margin */
+    }
+
+    .order-form input[type="text"],
+    .order-form select,
+    .order-form textarea {
+        width: calc(100% - 20px); /* Adjust for padding */
+        padding: 10px;
+        margin-bottom: 12px;
+        font-size: 0.9em;
+    }
+
+    .order-form label {
+        font-size: 0.9em; /* Adjusted font size */
+        margin-bottom: 8px; /* Adjusted margin */
+    }
+
+    .order-form input[type="radio"] {
+         margin-right: 5px;
+    }
+
+    .submit-order {
+         padding: 12px 20px; /* Adjusted padding */
+        font-size: 1.2em; /* Adjusted font size */
+        margin-top: 15px; /* Adjusted margin */
+    }
+
+    .promo-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px; /* Adjusted padding */
+    }
+
+     .promo-item img {
+        height: 40px; /* Adjusted size */
+        margin-right: 0;
+        margin-bottom: 8px; /* Adjusted margin */
+     }
+
+    .promo-price .original-price del {
+         font-size: 0.8em; /* Adjusted font size */
+     }
+
+    .promo-price .discount-price {
+        font-size: 1.2em; /* Adjusted font size */
+    }
+
+    .faq-section h2 {
+         font-size: 1.8em; /* Adjusted font size */
+         margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    .faq-section p {
+         font-size: 0.9em; /* Adjusted font size */
+         margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .faq-form {
+        flex-direction: column;
+        gap: 10px; /* Adjusted gap */
+        max-width: 100%;
+    }
+
+    .faq-form input[type="text"] {
+        width: calc(100% - 20px); /* Adjusted width */
+        padding: 10px; /* Adjusted padding */
+        font-size: 0.9em; /* Adjusted font size */
+    }
+
+    .faq-form button {
+        width: 100%;
+        padding: 10px; /* Adjusted padding */
+        font-size: 0.9em; /* Adjusted font size */
+    }
+
+    .testimonials-section h2 {
+         font-size: 2em; /* Adjusted font size */
+         margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    .testimonials-section > p {
+        font-size: 0.9em; /* Adjusted font size */
+        margin-bottom: 15px; /* Adjusted margin */
+    }
+
+    .sort-options {
+        margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    .sort-options button {
+        padding: 5px 10px; /* Adjusted padding */
+        font-size: 0.8em; /* Adjusted font size */
+    }
+
+    .testimonial-item {
+        padding: 15px; /* Adjusted padding */
+    }
+
+    .testimonial-item img {
+        width: 40px; /* Adjusted size */
+        height: 40px; /* Adjusted size */
+        margin-bottom: 10px; /* Adjusted margin */
+    }
+
+     .testimonial-item .customer-name {
+         font-size: 0.9em; /* Adjusted font size */
+     }
+
+     .testimonial-item .stars {
+         font-size: 0.9em; /* Adjusted font size */
+         margin-bottom: 3px; /* Adjusted margin */
+     }
+
+      .testimonial-item .verified {
+          font-size: 0.8em; /* Adjusted font size */
+          margin-bottom: 8px; /* Adjusted margin */
+      }
+
+    .testimonial-item .review-text {
+        font-size: 0.9em; /* Adjusted font size */
+        margin-bottom: 10px; /* Adjusted margin */
+    }
+
+    .testimonial-item .review-image img {
+        margin-top: 8px; /* Adjusted margin */
+    }
+
+     .testimonial-item .review-time {
+         font-size: 0.8em; /* Adjusted font size */
+     }
+
+    /* Footer */
+    footer {
+        padding: 30px 15px 15px 15px; /* Adjusted padding */
+    }
+
+    .footer-content {
+         gap: 15px; /* Adjusted gap */
+         margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    .footer-column h4 {
+        margin-bottom: 8px; /* Adjusted margin */
+    }
+
+    .footer-column p {
+        font-size: 0.8em; /* Adjusted font size */
+    }
+
+    .footer-column a {
+         font-size: 0.8em; /* Adjusted font size */
+    }
+
+    .footer-column form {
+        flex-direction: column;
+    }
+
+    .footer-column input[type="text"],
+    .footer-column button {
+        width: calc(100% - 16px); /* Adjusted width */
+        margin-bottom: 8px; /* Adjusted margin */
+        font-size: 0.8em; /* Adjusted font size */
+    }
+
+     .footer-column button {
+         margin-bottom: 0;
+         padding: 6px 10px; /* Adjusted padding */
+     }
+
+    .footer-bottom {
+        font-size: 0.7em; /* Further adjusted font size */
+    }
+} 
