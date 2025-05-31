@@ -240,7 +240,6 @@ const deadline = new Date();
     document.getElementById('orderForm').addEventListener('submit', function (e) {
         e.preventDefault();
       
-        // Hiển thị loading
         const loading = document.createElement('div');
         loading.innerText = "Đang gửi đơn hàng...";
         loading.id = "loading-message";
@@ -255,36 +254,30 @@ const deadline = new Date();
         `;
         this.prepend(loading);
       
-        // Lấy text hiển thị Tỉnh/Quận/Phường
         const province = document.querySelector('select[name="province"]');
         const district = document.querySelector('select[name="district"]');
         const ward = document.querySelector('select[name="ward"]');
       
-        const formData = {
-          name: this.name.value,
-          phone: this.phone.value,
-          address: this.address.value,
-          province: province.options[province.selectedIndex].text,
-          district: district.options[district.selectedIndex].text,
-          ward: ward.options[ward.selectedIndex].text,
-          detailed_address: this.detailed_address.value,
-          quantity: this.quantity.value
-        };
+        // 👉 Gửi bằng FormData
+        const formData = new FormData();
+        formData.append("name", this.name.value);
+        formData.append("phone", this.phone.value);
+        formData.append("address", this.address.value);
+        formData.append("province", province.options[province.selectedIndex].text);
+        formData.append("district", district.options[district.selectedIndex].text);
+        formData.append("ward", ward.options[ward.selectedIndex].text);
+        formData.append("detailed_address", this.detailed_address.value);
+        formData.append("quantity", this.quantity.value);
       
         fetch('https://script.google.com/macros/s/AKfycbz0oNPH3K19xbzzo60gGAd9hqm9CThb_gnkvif0iBMgBZc5R05iCbg1iIhfEUzXio9LTg/exec', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
+          body: formData
         })
-        .then(res => res.json())
-        .then(data => {
+        .then(() => {
           loading.remove();
-      
-          const resultMsg = document.createElement('div');
-          resultMsg.innerText = `✅ ${data.message}`;
-          resultMsg.style.cssText = `
+          const successMsg = document.createElement('div');
+          successMsg.innerText = "✅ Đơn hàng đã được gửi thành công!";
+          successMsg.style.cssText = `
             padding: 10px;
             background: #d4edda;
             border: 1px solid #c3e6cb;
@@ -293,13 +286,12 @@ const deadline = new Date();
             text-align: center;
             margin-bottom: 10px;
           `;
-          this.prepend(resultMsg);
-          setTimeout(() => resultMsg.remove(), 5000);
+          this.prepend(successMsg);
+          setTimeout(() => successMsg.remove(), 5000);
           this.reset();
         })
         .catch(err => {
           loading.remove();
-      
           const errorMsg = document.createElement('div');
           errorMsg.innerText = "❌ Gửi đơn hàng thất bại! Vui lòng thử lại.";
           errorMsg.style.cssText = `
@@ -315,6 +307,7 @@ const deadline = new Date();
           console.error("Fetch error:", err);
         });
       });
+      
       
       
       
