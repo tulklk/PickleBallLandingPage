@@ -237,9 +237,12 @@ const deadline = new Date();
     updateCountdown(); // gọi lần đầu tiên để hiển thị ngay
 
     //Gửi đơn tới Google Sheet
-    document.getElementById('orderForm').addEventListener('submit', function (e) {
+    document.getElementById('orderForm').addEventListener('submit', async function (e) {
         e.preventDefault();
       
+        const form = this;
+      
+        // Loading message
         const loading = document.createElement('div');
         loading.innerText = "Đang gửi đơn hàng...";
         loading.id = "loading-message";
@@ -252,45 +255,56 @@ const deadline = new Date();
           text-align: center;
           margin-bottom: 10px;
         `;
-        this.prepend(loading);
+        form.prepend(loading);
       
-        const province = document.querySelector('select[name="province"]');
-        const district = document.querySelector('select[name="district"]');
-        const ward = document.querySelector('select[name="ward"]');
+        // Lấy option text
+        const province = form.province.options[form.province.selectedIndex].text;
+        const district = form.district.options[form.district.selectedIndex].text;
+        const ward = form.ward.options[form.ward.selectedIndex].text;
       
-        // 👉 Gửi bằng FormData
+        // Dữ liệu gửi đi bằng FormData
         const formData = new FormData();
-        formData.append("name", this.name.value);
-        formData.append("phone", this.phone.value);
-        formData.append("address", this.address.value);
-        formData.append("province", province.options[province.selectedIndex].text);
-        formData.append("district", district.options[district.selectedIndex].text);
-        formData.append("ward", ward.options[ward.selectedIndex].text);
-        formData.append("detailed_address", this.detailed_address.value);
-        formData.append("quantity", this.quantity.value);
+        formData.append("name", form.name.value);
+        formData.append("phone", form.phone.value);
+        formData.append("address", form.address.value);
+        formData.append("province", province);
+        formData.append("district", district);
+        formData.append("ward", ward);
+        formData.append("detailed_address", form.detailed_address.value);
+        formData.append("quantity", form.quantity.value);
       
-        fetch('https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec', {
-          method: 'POST',
-          body: formData
-        })
-        .then(() => {
-          loading.remove();
-          const successMsg = document.createElement('div');
-          successMsg.innerText = "✅ Đơn hàng đã được gửi thành công!";
-          successMsg.style.cssText = `
-            padding: 10px;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-          `;
-          this.prepend(successMsg);
-          setTimeout(() => successMsg.remove(), 5000);
-          this.reset();
-        })
-        .catch(err => {
+        try {
+          const response = await fetch("https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec", {
+            method: 'POST',
+            body: formData
+          });
+      
+          const text = await response.text();
+      
+          try {
+            const json = JSON.parse(text); // nếu server trả về JSON hợp lệ
+            loading.remove();
+      
+            const successMsg = document.createElement('div');
+            successMsg.innerText = `✅ ${json.message || "Đơn hàng đã gửi thành công!"}`;
+            successMsg.style.cssText = `
+              padding: 10px;
+              background: #d4edda;
+              border: 1px solid #c3e6cb;
+              color: #155724;
+              font-weight: bold;
+              text-align: center;
+              margin-bottom: 10px;
+            `;
+            form.prepend(successMsg);
+            setTimeout(() => successMsg.remove(), 5000);
+            form.reset();
+      
+          } catch (jsonError) {
+            throw new Error("Phản hồi không phải JSON hợp lệ.");
+          }
+      
+        } catch (err) {
           loading.remove();
           const errorMsg = document.createElement('div');
           errorMsg.innerText = "❌ Gửi đơn hàng thất bại! Vui lòng thử lại.";
@@ -303,10 +317,11 @@ const deadline = new Date();
             text-align: center;
             margin-bottom: 10px;
           `;
-          this.prepend(errorMsg);
-          console.error("Fetch error:", err);
-        });
+          form.prepend(errorMsg);
+          console.error("Lỗi gửi đơn:", err);
+        }
       });
+      
       
       
       
