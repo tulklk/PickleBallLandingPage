@@ -237,7 +237,6 @@ const deadline = new Date();
     updateCountdown(); // gọi lần đầu tiên để hiển thị ngay
 
     //Gửi đơn tới Google Sheet
-
     document.getElementById('orderForm').addEventListener('submit', function (e) {
         e.preventDefault();
       
@@ -272,7 +271,7 @@ const deadline = new Date();
           quantity: this.quantity.value
         };
       
-        fetch('https://script.google.com/macros/s/AKfycbxNOPuGVonNcYdOxix5RmRjl1T6Ur7_wgIi6Xdo72pa9A4V348u69rYMb7ljzZ1wVhNuQ/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbz0oNPH3K19xbzzo60gGAd9hqm9CThb_gnkvif0iBMgBZc5R05iCbg1iIhfEUzXio9LTg/exec', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
