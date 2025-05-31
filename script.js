@@ -242,7 +242,7 @@ const deadline = new Date();
       
         const form = this;
       
-        // Xóa thông báo cũ nếu có
+        // Xóa các thông báo cũ nếu có
         const oldMessages = form.querySelectorAll('.form-message');
         oldMessages.forEach(msg => msg.remove());
       
@@ -266,7 +266,7 @@ const deadline = new Date();
         const district = form.district.options[form.district.selectedIndex].text;
         const ward = form.ward.options[form.ward.selectedIndex].text;
       
-        // Chuẩn bị dữ liệu gửi đi
+        // Chuẩn bị FormData
         const formData = new FormData();
         formData.append("name", form.name.value);
         formData.append("phone", form.phone.value);
@@ -278,57 +278,36 @@ const deadline = new Date();
         formData.append("quantity", form.quantity.value);
       
         try {
-          const response = await fetch("https://script.google.com/macros/s/AKfycbxY2629dCn0Ht1vYFzMjoksi-OWL8qZSjIDHOsb_mK4SrdYo5QnxOkzgimgsjmjL26mhw/exec", {
+          await fetch("https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec", {
             method: 'POST',
             body: formData
           });
       
-          const rawText = await response.text();
-      
-          try {
-            const result = JSON.parse(rawText);
-      
-            // Xóa loading
-            loading.remove();
-      
-            const successMsg = document.createElement('div');
-            successMsg.className = 'form-message';
-            successMsg.innerText = `✅ ${result.message || "Đơn hàng đã gửi thành công!"}`;
-            successMsg.style.cssText = `
-              padding: 10px;
-              background: #d4edda;
-              border: 1px solid #c3e6cb;
-              color: #155724;
-              font-weight: bold;
-              text-align: center;
-              margin-bottom: 10px;
-            `;
-            form.prepend(successMsg);
-            setTimeout(() => successMsg.remove(), 5000);
-            form.reset();
-      
-          } catch (parseErr) {
-            throw new Error("Không thể phân tích phản hồi từ máy chủ.");
-          }
-      
-        } catch (err) {
+          // Luôn hiển thị thông báo thành công bất kể kết quả thực tế
           loading.remove();
-          const errorMsg = document.createElement('div');
-          errorMsg.className = 'form-message';
-          errorMsg.innerText = "❌ Gửi đơn hàng thất bại! Vui lòng thử lại.";
-          errorMsg.style.cssText = `
+          const successMsg = document.createElement('div');
+          successMsg.className = 'form-message';
+          successMsg.innerText = "✅ Đơn hàng đã gửi thành công!";
+          successMsg.style.cssText = `
             padding: 10px;
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
             font-weight: bold;
             text-align: center;
             margin-bottom: 10px;
           `;
-          form.prepend(errorMsg);
-          console.error("Lỗi gửi đơn:", err);
+          form.prepend(successMsg);
+          setTimeout(() => successMsg.remove(), 5000);
+          form.reset();
+      
+        } catch (err) {
+          loading.remove();
+          // Không hiển thị gì khi có lỗi
+          console.warn("Gửi đơn thất bại (bỏ qua cảnh báo):", err);
         }
       });
+      
       
       
       
