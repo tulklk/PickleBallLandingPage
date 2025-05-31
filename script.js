@@ -236,7 +236,7 @@ const deadline = new Date();
     setInterval(updateCountdown, 1000);
     updateCountdown(); // gọi lần đầu tiên để hiển thị ngay
 
-    //Gửi đơn tới Google Sheet
+    //Gửi đơn tới Google Sheet PickleBall
     document.getElementById('orderForm').addEventListener('submit', async function (e) {
         e.preventDefault();
       
@@ -304,7 +304,7 @@ const deadline = new Date();
         } catch (err) {
           loading.remove();
           // Không hiển thị gì khi có lỗi
-          console.warn("Gửi đơn thất bại (bỏ qua cảnh báo):", err);
+          console.warn("(bỏ qua cảnh báo):", err);
         }
       });
       
