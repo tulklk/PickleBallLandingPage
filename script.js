@@ -269,7 +269,7 @@ const deadline = new Date();
         formData.append("detailed_address", this.detailed_address.value);
         formData.append("quantity", this.quantity.value);
       
-        fetch('https://script.google.com/macros/s/AKfycbz0oNPH3K19xbzzo60gGAd9hqm9CThb_gnkvif0iBMgBZc5R05iCbg1iIhfEUzXio9LTg/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec', {
           method: 'POST',
           body: formData
         })
