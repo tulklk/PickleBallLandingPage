@@ -336,7 +336,7 @@ const deadline = new Date();
       
         fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
           method: 'POST',
-          mode: 'no-cors',
+        //   mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json'
           },
