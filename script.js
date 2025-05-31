@@ -272,7 +272,7 @@ const deadline = new Date();
           quantity: this.quantity.value
         };
       
-        fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbxNOPuGVonNcYdOxix5RmRjl1T6Ur7_wgIi6Xdo72pa9A4V348u69rYMb7ljzZ1wVhNuQ/exec', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
