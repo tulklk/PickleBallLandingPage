@@ -235,3 +235,146 @@ const deadline = new Date();
     // Gọi hàm mỗi giây
     setInterval(updateCountdown, 1000);
     updateCountdown(); // gọi lần đầu tiên để hiển thị ngay
+
+    //Gửi đơn tới Google Sheet
+    // document.getElementById('orderForm').addEventListener('submit', function (e) {
+    //     e.preventDefault();
+      
+    //     const formData = {
+    //       name: this.name.value,
+    //       phone: this.phone.value,
+    //       address: this.address.value,
+    //       province: this.province.value,
+    //       district: this.district.value,
+    //       ward: this.ward.value,
+    //       detailed_address: this.detailed_address.value,
+    //       quantity: this.quantity.value
+    //     };
+      
+    //     fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
+    //       method: 'POST',
+    //       body: JSON.stringify(formData),
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       }
+    //     }).then(res => {
+    //       if (res.ok) {
+    //         alert("Đơn hàng đã gửi thành công!");
+    //         document.getElementById('orderForm').reset();
+    //       } else {
+    //         alert("Có lỗi xảy ra!");
+    //       }
+    //     }).catch(err => {
+    //       console.error(err);
+    //       alert("Gửi thất bại!");
+    //     });
+    //   });
+    // document.getElementById('orderForm').addEventListener('submit', function (e) {
+    //     e.preventDefault();
+      
+    //     const formData = {
+    //       name: this.name.value,
+    //       phone: this.phone.value,
+    //       address: this.address.value,
+    //       province: this.province.value,
+    //       district: this.district.value,
+    //       ward: this.ward.value,
+    //       detailed_address: this.detailed_address.value,
+    //       quantity: this.quantity.value
+    //     };
+      
+    //     fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
+    //       method: 'POST',
+    //       mode: 'no-cors', // 👈 KHẮC PHỤC LỖI CORS
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify(formData)
+    //     }).then(() => {
+    //       // Không thể kiểm tra res.ok trong chế độ no-cors (response bị opaque)
+    //       alert("Đơn hàng đã gửi! Dữ liệu sẽ có trên Google Sheets sau vài giây.");
+    //       document.getElementById('orderForm').reset();
+    //     }).catch(err => {
+    //       console.error(err);
+    //       alert("Gửi thất bại: " + err.message);
+    //     });
+    //   });
+
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+      
+        // Hiển thị loading
+        const loading = document.createElement('div');
+        loading.innerText = "Đang gửi đơn hàng...";
+        loading.id = "loading-message";
+        loading.style.cssText = `
+          padding: 10px;
+          background: #fff3cd;
+          border: 1px solid #ffeeba;
+          color: #856404;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 10px;
+        `;
+        this.prepend(loading);
+      
+        // Lấy đúng text hiển thị của Tỉnh/Quận/Phường
+        const province = document.querySelector('select[name="province"]');
+        const district = document.querySelector('select[name="district"]');
+        const ward = document.querySelector('select[name="ward"]');
+      
+        const formData = {
+          name: this.name.value,
+          phone: this.phone.value,
+          address: this.address.value,
+          province: province.options[province.selectedIndex].text,
+          district: district.options[district.selectedIndex].text,
+          ward: ward.options[ward.selectedIndex].text,
+          detailed_address: this.detailed_address.value,
+          quantity: this.quantity.value
+        };
+      
+        fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        }).then(() => {
+          loading.remove(); // Xóa loading
+      
+          const successMsg = document.createElement('div');
+          successMsg.innerText = "✅ Đơn hàng đã gửi thành công! Cảm ơn bạn.";
+          successMsg.style.cssText = `
+            padding: 10px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+          `;
+          this.prepend(successMsg);
+          setTimeout(() => successMsg.remove(), 5000); // Tự ẩn sau 5s
+          this.reset();
+        }).catch((err) => {
+          loading.remove();
+          const errorMsg = document.createElement('div');
+          errorMsg.innerText = "❌ Gửi đơn hàng thất bại! Vui lòng thử lại.";
+          errorMsg.style.cssText = `
+            padding: 10px;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+          `;
+          this.prepend(errorMsg);
+        });
+      });
+      
+      
+      
+      
