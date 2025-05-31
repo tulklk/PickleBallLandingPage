@@ -237,36 +237,83 @@ const deadline = new Date();
     updateCountdown(); // gọi lần đầu tiên để hiển thị ngay
 
     //Gửi đơn tới Google Sheet PickleBall
-    document.getElementById('orderForm').addEventListener('submit', async function (e) {
+    // document.getElementById('orderForm').addEventListener('submit', function (e) {
+    //     e.preventDefault();
+      
+    //     const form = this;
+      
+    //     // Xóa thông báo cũ
+    //     form.querySelectorAll('.form-message').forEach(el => el.remove());
+      
+    //     // Hiển thị loading
+    //     const loading = document.createElement('div');
+    //     loading.className = 'form-message';
+    //     loading.innerText = "Đang gửi đơn hàng...";
+    //     loading.style.cssText = `
+    //       padding: 10px;
+    //       background: #fff3cd;
+    //       border: 1px solid #ffeeba;
+    //       color: #856404;
+    //       font-weight: bold;
+    //       text-align: center;
+    //       margin-bottom: 10px;
+    //     `;
+    //     form.prepend(loading);
+      
+    //     // Lấy text từ select
+    //     const province = form.province.options[form.province.selectedIndex].text;
+    //     const district = form.district.options[form.district.selectedIndex].text;
+    //     const ward = form.ward.options[form.ward.selectedIndex].text;
+      
+    //     const formData = new FormData();
+    //     formData.append("name", form.name.value);
+    //     formData.append("phone", form.phone.value);
+    //     formData.append("address", form.address.value);
+    //     formData.append("province", province);
+    //     formData.append("district", district);
+    //     formData.append("ward", ward);
+    //     formData.append("detailed_address", form.detailed_address.value);
+    //     formData.append("quantity", form.quantity.value);
+      
+    //     // Gửi không cần chờ phản hồi
+    //     fetch("https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec", {
+    //       method: 'POST',
+    //       body: formData
+    //     });
+      
+    //     // Hiển thị cảm ơn sau khi gửi
+    //     loading.remove();
+    //     const successMsg = document.createElement('div');
+    //     successMsg.className = 'form-message';
+    //     successMsg.innerText = "✅ Cảm ơn bạn đã đặt hàng!";
+    //     successMsg.style.cssText = `
+    //       padding: 10px;
+    //       background: #d4edda;
+    //       border: 1px solid #c3e6cb;
+    //       color: #155724;
+    //       font-weight: bold;
+    //       text-align: center;
+    //       margin-bottom: 10px;
+    //     `;
+    //     form.prepend(successMsg);
+    //     setTimeout(() => successMsg.remove(), 5000);
+    //     form.reset();
+    //   });
+
+      document.getElementById('orderForm').addEventListener('submit', function (e) {
         e.preventDefault();
       
         const form = this;
       
-        // Xóa các thông báo cũ nếu có
-        const oldMessages = form.querySelectorAll('.form-message');
-        oldMessages.forEach(msg => msg.remove());
+        // Xóa các popup cũ nếu có
+        const oldPopup = document.querySelector('.thank-you-popup');
+        if (oldPopup) oldPopup.remove();
       
-        // Hiển thị loading
-        const loading = document.createElement('div');
-        loading.className = 'form-message';
-        loading.innerText = "Đang gửi đơn hàng...";
-        loading.style.cssText = `
-          padding: 10px;
-          background: #fff3cd;
-          border: 1px solid #ffeeba;
-          color: #856404;
-          font-weight: bold;
-          text-align: center;
-          margin-bottom: 10px;
-        `;
-        form.prepend(loading);
-      
-        // Lấy dữ liệu từ các select
+        // Lấy dữ liệu từ select
         const province = form.province.options[form.province.selectedIndex].text;
         const district = form.district.options[form.district.selectedIndex].text;
         const ward = form.ward.options[form.ward.selectedIndex].text;
       
-        // Chuẩn bị FormData
         const formData = new FormData();
         formData.append("name", form.name.value);
         formData.append("phone", form.phone.value);
@@ -277,36 +324,34 @@ const deadline = new Date();
         formData.append("detailed_address", form.detailed_address.value);
         formData.append("quantity", form.quantity.value);
       
-        try {
-          await fetch("https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec", {
-            method: 'POST',
-            body: formData
-          });
+        // Gửi dữ liệu mà không chờ phản hồi
+        fetch("https://script.google.com/macros/s/AKfycbwlZbcTRe-WSWBUnAl1iyKm3kVRvjnrJcyw3K660cooltHmWi-3zXHbrvNbvWp1LkkA0w/exec", {
+          method: 'POST',
+          body: formData
+        });
       
-          // Luôn hiển thị thông báo thành công bất kể kết quả thực tế
-          loading.remove();
-          const successMsg = document.createElement('div');
-          successMsg.className = 'form-message';
-          successMsg.innerText = "✅ Đơn hàng đã gửi thành công!";
-          successMsg.style.cssText = `
-            padding: 10px;
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
-          `;
-          form.prepend(successMsg);
-          setTimeout(() => successMsg.remove(), 5000);
-          form.reset();
+        // Hiển thị popup cảm ơn
+        const popup = document.createElement('div');
+        popup.className = 'thank-you-popup';
+        popup.innerHTML = `
+          <div class="popup-content">
+            <button class="close-popup">✖</button>
+            <h3>✅ Cảm ơn bạn đã đặt hàng!</h3>
+            <p>Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng.</p>
+          </div>
+        `;
+        document.body.appendChild(popup);
       
-        } catch (err) {
-          loading.remove();
-          // Không hiển thị gì khi có lỗi
-          console.warn("(bỏ qua cảnh báo):", err);
-        }
+        // Xử lý nút đóng
+        popup.querySelector('.close-popup').addEventListener('click', () => popup.remove());
+      
+        // Tự động đóng sau 5 giây
+        setTimeout(() => popup.remove(), 5000);
+      
+        form.reset();
       });
+      
+      
       
       
       

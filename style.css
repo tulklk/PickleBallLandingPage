@@ -675,6 +675,58 @@ footer {
     color: #cccccc; /* Grey color */
 }
 
+.thank-you-popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .popup-content {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+  }
+  
+  .popup-content h3 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #2c7a36;
+  }
+  
+  .popup-content p {
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+  }
+  
+  @keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .top-nav {
