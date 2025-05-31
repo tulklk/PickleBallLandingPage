@@ -237,68 +237,6 @@ const deadline = new Date();
     updateCountdown(); // gọi lần đầu tiên để hiển thị ngay
 
     //Gửi đơn tới Google Sheet
-    // document.getElementById('orderForm').addEventListener('submit', function (e) {
-    //     e.preventDefault();
-      
-    //     const formData = {
-    //       name: this.name.value,
-    //       phone: this.phone.value,
-    //       address: this.address.value,
-    //       province: this.province.value,
-    //       district: this.district.value,
-    //       ward: this.ward.value,
-    //       detailed_address: this.detailed_address.value,
-    //       quantity: this.quantity.value
-    //     };
-      
-    //     fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
-    //       method: 'POST',
-    //       body: JSON.stringify(formData),
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       }
-    //     }).then(res => {
-    //       if (res.ok) {
-    //         alert("Đơn hàng đã gửi thành công!");
-    //         document.getElementById('orderForm').reset();
-    //       } else {
-    //         alert("Có lỗi xảy ra!");
-    //       }
-    //     }).catch(err => {
-    //       console.error(err);
-    //       alert("Gửi thất bại!");
-    //     });
-    //   });
-    // document.getElementById('orderForm').addEventListener('submit', function (e) {
-    //     e.preventDefault();
-      
-    //     const formData = {
-    //       name: this.name.value,
-    //       phone: this.phone.value,
-    //       address: this.address.value,
-    //       province: this.province.value,
-    //       district: this.district.value,
-    //       ward: this.ward.value,
-    //       detailed_address: this.detailed_address.value,
-    //       quantity: this.quantity.value
-    //     };
-      
-    //     fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
-    //       method: 'POST',
-    //       mode: 'no-cors', // 👈 KHẮC PHỤC LỖI CORS
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(formData)
-    //     }).then(() => {
-    //       // Không thể kiểm tra res.ok trong chế độ no-cors (response bị opaque)
-    //       alert("Đơn hàng đã gửi! Dữ liệu sẽ có trên Google Sheets sau vài giây.");
-    //       document.getElementById('orderForm').reset();
-    //     }).catch(err => {
-    //       console.error(err);
-    //       alert("Gửi thất bại: " + err.message);
-    //     });
-    //   });
 
     document.getElementById('orderForm').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -318,7 +256,7 @@ const deadline = new Date();
         `;
         this.prepend(loading);
       
-        // Lấy đúng text hiển thị của Tỉnh/Quận/Phường
+        // Lấy text hiển thị Tỉnh/Quận/Phường
         const province = document.querySelector('select[name="province"]');
         const district = document.querySelector('select[name="district"]');
         const ward = document.querySelector('select[name="ward"]');
@@ -336,17 +274,18 @@ const deadline = new Date();
       
         fetch('https://script.google.com/macros/s/AKfycbxIifnmwIK0yOii8xz7dzDDcZWp4gEAi0nmaX6nOLmbcuuXBPIUr9JPyIgy98EOpn9H1A/exec', {
           method: 'POST',
-        //   mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(formData)
-        }).then(() => {
-          loading.remove(); // Xóa loading
+        })
+        .then(res => res.json())
+        .then(data => {
+          loading.remove();
       
-          const successMsg = document.createElement('div');
-          successMsg.innerText = "✅ Đơn hàng đã gửi thành công! Cảm ơn bạn.";
-          successMsg.style.cssText = `
+          const resultMsg = document.createElement('div');
+          resultMsg.innerText = `✅ ${data.message}`;
+          resultMsg.style.cssText = `
             padding: 10px;
             background: #d4edda;
             border: 1px solid #c3e6cb;
@@ -355,11 +294,13 @@ const deadline = new Date();
             text-align: center;
             margin-bottom: 10px;
           `;
-          this.prepend(successMsg);
-          setTimeout(() => successMsg.remove(), 5000); // Tự ẩn sau 5s
+          this.prepend(resultMsg);
+          setTimeout(() => resultMsg.remove(), 5000);
           this.reset();
-        }).catch((err) => {
+        })
+        .catch(err => {
           loading.remove();
+      
           const errorMsg = document.createElement('div');
           errorMsg.innerText = "❌ Gửi đơn hàng thất bại! Vui lòng thử lại.";
           errorMsg.style.cssText = `
@@ -372,8 +313,10 @@ const deadline = new Date();
             margin-bottom: 10px;
           `;
           this.prepend(errorMsg);
+          console.error("Fetch error:", err);
         });
       });
+      
       
       
       
